@@ -1,51 +1,41 @@
-int myX=25;
-int myY=25;
-float total;
-float totalTotal=0;
-int totaldie;
-String totalAverage;
-int numOrow= width/16;
-int numCol=height/8;
-int numRowN=0;
-int numColN=0;
-
-void setup()
-{
-  size(750,750);
-  noLoop();
-}
-void draw()
-{
-  myX=width/2-(numCol/2)*55;
-  myY=height/2-((numOrow/2)*55+75);
-  total=0;
-   numColN=0;
-   numRowN=0;
-  background(174,248,251);
-  
-  while (numRowN<numOrow) {
-    while (numColN<numCol) {
-      die Bob= new die(myX, myY);
-      Bob.show();
-      myX=myX+55;
-      totaldie++;
-      total=total+(Bob.f);
-      numColN++;
-    }
-    myY=myY+55;
-    myX=width/2-(numCol/2)*55;
-    numColN=0;
-    numRowN++;
+class die {
+  float f;
+  int myX, myY;
+  float offsetx = 22.5;
+  int offsety = 30;
+  int rolled;
+  die(int x, int y)
+  {
+    roll();
+    myX = x;
+    myY = y;
   }
-  totalTotal=totalTotal+total;
-  totalAverage=String.format("%.2g%n",total/(numOrow*numCol));
-  textSize(16);
-  text("total on screen:  "+total, width/2, height-200);
-  text("dice rolled:  "+totaldie, width/2, height-175);
-  text("total rolled:  "+totalTotal, 100, height-200);
-  text("average of dice: "+totalAverage, 200, height-175);
-}
-void mousePressed()
-{
-  redraw();
+ 
+  void roll() {
+    f =((int)(Math.random()*6)+1);
+  }
+  void show() {
+    fill(255);
+    stroke(5);
+    fill(78,150,193);
+    rect(myX, myY, 50, 50) ;
+    fill(0);
+    if (f == 6) {
+      text ('6', myX+offsetx, myY+offsety);
+    }
+    else if (f == 5) {
+      text ('5', myX+offsetx, myY+offsety);
+    }
+    else if (f == 4) {
+      text ('4', myX+offsetx, myY+offsety);
+    }
+    else if (f == 3) {
+      text (3, myX+offsetx, myY+offsety);
+    }
+    else if (f == 2) {
+      text (2, myX+offsetx, myY+offsety);
+    } else {
+      text (1, myX+offsetx, myY+offsety);
+    }
+  }
 }
